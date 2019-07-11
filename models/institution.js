@@ -5,13 +5,11 @@ const jwt = require("jsonwebtoken");
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const SchoolSchema = new Schema({
-  id: {
-    type: String
-  },
-  name: {
-    type: String
-  }
+const InstitutionSchema = new Schema({
+  id: String,
+  name: String
 }, {
   timestamps: true
 })
+
+module.exports = mongoose.model('Institution', InstitutionSchema)
