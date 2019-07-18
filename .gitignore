@@ -64,3 +64,4 @@ typings/
 # Config file
 # config/key.js
 # config/middleware.js
+"sendgrid.env" 
