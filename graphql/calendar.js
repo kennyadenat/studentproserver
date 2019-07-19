@@ -14,7 +14,21 @@ const CalendarType = new GraphQLObjectType({
   name: 'CalendarType',
   fields: () => {
     return {
-
+      title: GraphQLString,
+      institution: GraphQLString,
+      type: GraphQLString,
+      color: GraphQLString,
+      note: GraphQLString,
+      status: GraphQLString,
+      startdate: GraphQLDate,
+      enddate: GraphQLDate,
+      timezone: GraphQLDate,
+      calendarevent: {
+        type: new GraphQLList(analysisType)
+      },
+      calendarauthor: {
+        type: new GraphQLList(analysisType)
+      }
     }
   }
 })

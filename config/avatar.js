@@ -30,16 +30,21 @@ exports.avatarthree = function () {
   }, {
     avatar: '100_14.jpg'
   }]
-  return avatars;
-  // avatars.forEach(element => {
-  //   element.avatar = '/assets/avatar/' + element.avatar;
-  //   const newAvatar = new Avatar(element);
-  //   newAvatar.save((err, avr) => {
 
-  //   });
-  // });
+  // addAvatar(avatars);
+  return avatars;
+
 }
 
+function addAvatar(avatars) {
+  avatars.forEach(element => {
+    element.avatar = '/assets/avatar/' + element.avatar;
+    const newAvatar = new Avatar(element);
+    newAvatar.save((err, avr) => {
+
+    });
+  });
+}
 
 exports.avatarone = function () {
 
@@ -72,17 +77,11 @@ exports.avatarone = function () {
   }, {
     avatar: '300_14.jpg'
   }]
-  // avatarsList.forEach(element => {
-  //   element.avatar = '/assets/avatar/' + element.avatar;
-  //   const newAvatar = new Avatar(element);
-  //   newAvatar.save((err, avr) => {
 
-  //   });
-  // });
+  addAvatar(avatarsList);
 }
 
 exports.chooseAvatar = function (avatar) {
-  // const arrays = avatar.avatarthree();
   const rands = avatar[Math.floor(Math.random() * avatar.length)];
   const avatars = '/assets/avatar/' + rands.avatar;
   return avatars;

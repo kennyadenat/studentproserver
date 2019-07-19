@@ -29,8 +29,6 @@ router.post('/signup', (req, res) => {
       token.save((err) => {
         console.log(err);
         //generate the mail link token
-        const localUrl = 'http://localhost:4200/';
-        // const url = 'http:\/\/' + localUrl + '\/confirmemail\/' + token.token;
         const url = 'http:\/\/' + req.headers.host + '\/auth\/confirmemail?token=' + token.token;
         const payload = {
           email: user.email,
@@ -47,8 +45,6 @@ router.post('/signup', (req, res) => {
 
 // user email confirmation router
 router.get('/confirmemail', (req, res, next) => {
-  // console.log(req.params.id);
-  // console.log(req.query.token);
   UserToken.findOne({
     token: req.query.token
   }, (err, token) => {

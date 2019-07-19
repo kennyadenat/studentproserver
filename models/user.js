@@ -20,7 +20,7 @@ const UserSchema = new Schema({
     type: String,
     required: [true, "fullname cannot be empty"]
   },
-  matricno: String,
+  identityid: String,
   provider: String,
   googleId: String,
   facebookId: String,

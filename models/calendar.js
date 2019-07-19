@@ -15,10 +15,10 @@ const CalendarSchema = new Schema({
   status: Boolean,
   // for start date and end date, any event set wont exceed the calendar. .
   startdate: Date,
+  enddate: Date,
   timezone: {
     type: Date
   },
-  enddate: Date,
   calendarevent: [{
     type: Schema.Types.ObjectId,
     ref: "CalendarEvent"

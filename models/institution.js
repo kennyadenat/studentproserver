@@ -7,8 +7,8 @@ const Schema = mongoose.Schema;
 
 // this lists the various schools that exists
 const InstitutionSchema = new Schema({
-  id: String,
-  name: String
+  institution: String,
+  abbrev: String
 }, {
   timestamps: true
 })

@@ -17,10 +17,13 @@ const UserType = new GraphQLObjectType({
     _id: {
       type: GraphQLString
     },
-    username: {
+    email: {
       type: GraphQLString
     },
     fullname: {
+      type: GraphQLString
+    },
+    identityid: {
       type: GraphQLString
     },
     provider: {
@@ -38,14 +41,17 @@ const UserType = new GraphQLObjectType({
     token: {
       type: GraphQLString
     },
-    staffrole: {
-      type: GraphQLString
-    },
     hash: {
       type: GraphQLString
     },
     salt: {
       type: GraphQLString
+    },
+    role: {
+      type: GraphQLString
+    },
+    isVerified: {
+      type: GraphQLBoolean
     },
     createdon: {
       type: GraphQLDate

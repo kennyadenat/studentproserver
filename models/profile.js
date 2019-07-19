@@ -10,7 +10,6 @@ const ProfileSchema = new Schema({
   identityid: String,
   avatar: String,
   fullname: String,
-  gender: String,
   institution: [{
     name: String
   }],

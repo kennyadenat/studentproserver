@@ -10,20 +10,19 @@ const GraphQLDate = require('graphql-date');
 const AuthenticationError = require('apollo-server').AuthenticationError;
 
 
-const InstitutionType = new GraphQLObjectType({
-  name: 'InstitutionType',
+const FacultyType = new GraphQLObjectType({
+  name: 'FacultyType',
   fields: () => {
     return {
       _id: GraphQLString,
-      institution: GraphQLString,
-      abbrev: GraphQLString
+      faculty: GraphQLString
     }
   }
 })
 
 
-const InstitutionQuery = new GraphQLObjectType({
-  name: 'InstitutionQuery',
+const FacultyQuery = new GraphQLObjectType({
+  name: 'FacultyQuery',
   fields: () => {
     return {
 
@@ -31,8 +30,8 @@ const InstitutionQuery = new GraphQLObjectType({
   }
 })
 
-const InstitutionMutation = new GraphQLObjectType({
-  name: 'InstitutionMutation',
+const FacultyMutation = new GraphQLObjectType({
+  name: 'FacultyMutation',
   fields: () => {
     return {
 
@@ -42,6 +41,6 @@ const InstitutionMutation = new GraphQLObjectType({
 
 
 module.exports = new GraphQLSchema({
-  query: InstitutionQuery,
-  mutation: InstitutionMutation
+  query: FacultyQuery,
+  mutation: FacultyMutation
 })
