@@ -6,6 +6,8 @@ const uniqueValidator = require('mongoose-unique-validator');
 const mongoosePaginate = require('mongoose-paginate-v2');
 const Schema = mongoose.Schema;
 const Config = require('../config/key');
+const mongoose_fuzzy_searching = require('mongoose-fuzzy-searching');
+
 
 const UserSchema = new Schema({
   email: {
@@ -18,6 +20,8 @@ const UserSchema = new Schema({
   },
   fullname: {
     type: String,
+    lowercase: true,
+    trim: true,
     required: [true, "fullname cannot be empty"]
   },
   identityid: String,
@@ -49,6 +53,22 @@ UserSchema.plugin(mongoosePaginate);
 UserSchema.plugin(uniqueValidator, {
   message: "is already taken"
 })
+
+UserSchema.plugin(mongoose_fuzzy_searching, {
+  fields: [{
+    name: 'email',
+    minSize: 3,
+    prefixOnly: true,
+  }, {
+    name: 'fullname',
+    minSize: 3,
+    prefixOnly: true,
+  }, {
+    name: 'identityid',
+    minSize: 3,
+    prefixOnly: true,
+  }]
+});
 
 
 UserSchema.methods.setPassword = function (password) {

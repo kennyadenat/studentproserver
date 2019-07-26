@@ -8,14 +8,19 @@ const GraphQLInt = require('graphql').GraphQLInt;
 const GraphQLFloat = require('graphql').GraphQLFloat;
 const GraphQLDate = require('graphql-date');
 const AuthenticationError = require('apollo-server').AuthenticationError;
+const Level = require('../models/level');
 
 
 const LevelType = new GraphQLObjectType({
   name: 'LevelType',
   fields: () => {
     return {
-      _id: GraphQLString,
-      level: GraphQLString
+      _id: {
+        type: GraphQLString
+      },
+      level: {
+        type: GraphQLString
+      }
     }
   }
 })
@@ -25,7 +30,16 @@ const LevelQuery = new GraphQLObjectType({
   name: 'LevelQuery',
   fields: () => {
     return {
-
+      levels: {
+        type: new GraphQLList(LevelType),
+        resolve: (root, params) => {
+          const _lev = Level.find().sort('level').exec();
+          if (!_lev) {
+            throw new Error('Error');
+          }
+          return _lev;
+        }
+      }
     }
   }
 })
@@ -34,11 +48,16 @@ const LevelMutation = new GraphQLObjectType({
   name: 'LevelMutation',
   fields: () => {
     return {
+      addlevel: {
+        type: LevelType,
+        args: {},
+        resolve: () => {
 
+        }
+      }
     }
   }
 })
-
 
 module.exports = new GraphQLSchema({
   query: LevelQuery,

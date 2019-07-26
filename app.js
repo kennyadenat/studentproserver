@@ -9,11 +9,22 @@ const passportconfig = require('./config/passport');
 const avatar = require('./config/avatar')
 const graphQL = require('./config/graphql');
 const mongoose = require('./config/mongoose');
+const modelware = require('./config/modelware');
+const uuidv1 = require('uuid/v1');
+
 
 // Setup routes
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const authroutes = require('./routes/auth-routes');
+
+// Setup Modelware
+modelware.InstitutionModel();
+modelware.FacultyModel();
+modelware.DepartmentModel();
+modelware.LevelModel();
+modelware.CalendarType();
+modelware.LecturerOption();
 
 
 var app = express();

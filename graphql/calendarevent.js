@@ -8,48 +8,34 @@ const GraphQLInt = require('graphql').GraphQLInt;
 const GraphQLFloat = require('graphql').GraphQLFloat;
 const GraphQLDate = require('graphql-date');
 const AuthenticationError = require('apollo-server').AuthenticationError;
-const Faculty = require('../models/faculty');
 
 
-const FacultyType = new GraphQLObjectType({
-  name: 'FacultyType',
+const CalendareventType = new GraphQLObjectType({
+  name: 'CalendareventType',
   fields: () => {
     return {
       _id: {
         type: GraphQLString
       },
-      faculty: {
+      calendarid: {
+        type: GraphQLString
+      },
+      event: {
+        type: GraphQLString
+      },
+      note: {
         type: GraphQLString
       }
     }
   }
 })
 
-
-const FacultyQuery = new GraphQLObjectType({
-  name: 'FacultyQuery',
+const CalendareventQuery = new GraphQLObjectType({
+  name: 'CalendareventQuery',
   fields: () => {
     return {
-      facultys: {
-        type: new GraphQLList(FacultyType),
-        resolve: (root, params) => {
-          const _fac = Faculty.find().sort('faculty').exec();
-          if (!_fac) {
-            throw new Error('Error');
-          }
-          return _fac;
-        }
-      }
-    }
-  }
-})
-
-const FacultyMutation = new GraphQLObjectType({
-  name: 'FacultyMutation',
-  fields: () => {
-    return {
-      addfaculty: {
-        type: FacultyType,
+      events: {
+        type: new GraphQLList(CalendareventType),
         args: {},
         resolve: (root, params) => {
 
@@ -60,7 +46,22 @@ const FacultyMutation = new GraphQLObjectType({
 })
 
 
+const CalendareventMutation = new GraphQLObjectType({
+  name: 'CalendareventMutation',
+  fields: () => {
+    return {
+      addevents: {
+        type: CalendareventType,
+        args: {},
+        resolve: (root, params) => {
+
+        }
+      }
+    }
+  }
+})
+
 module.exports = new GraphQLSchema({
-  query: FacultyQuery,
-  mutation: FacultyMutation
+  query: CalendareventQuery,
+  mutation: CalendareventMutation
 })

@@ -20,6 +20,9 @@ const CalendarauthorSchema = new Schema({
   role: {
     type: String
   },
+  type: {
+    type: String
+  },
   isexist: {
     type: Boolean,
     default: false

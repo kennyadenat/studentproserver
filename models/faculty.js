@@ -4,8 +4,24 @@ const Schema = mongoose.Schema;
 
 const FacultySchema = new Schema({
   faculty: {
-    type: String
+    type: String,
+    unique: true,
+    lowercase: true,
+    trim: true
   }
 })
 
-module.exports = mongoose.model('Faculty', FacultySchema)
+FacultySchema.statics.addfaculty = (inst, cb) => {
+  Faculty.findOne({
+    faculty: inst
+  }, (err, insts) => {
+    if (!insts) {
+      const newInst = new Faculty({
+        faculty: inst
+      })
+      newInst.save();
+    }
+  })
+}
+
+const Faculty = module.exports = mongoose.model('Faculty', FacultySchema)

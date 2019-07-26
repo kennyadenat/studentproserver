@@ -11,6 +11,8 @@ const ExtractJwt = require('passport-jwt').ExtractJwt;
 const User = require('../models/user');
 const Keys = require('./key');
 const bcrypt = require('bcryptjs');
+const Profile = require('../models/profile')
+
 
 passport.serializeUser((user, done) => {
   done(null, user);
@@ -33,7 +35,6 @@ passport.use(new LocalStrategy(
       if (!user) {
         return done(null, false)
       } else {
-        // console.log(user);
         bcrypt.compare(password, user.hash, (err, res) => {
           if (err) {
             return done(err);
@@ -45,20 +46,6 @@ passport.use(new LocalStrategy(
         });
       }
     })
-
-    // const params = {
-    //   email: username,
-    //   password: password
-    // }
-
-    // User.authentication(params, (err, user) => {
-    //   if (err) {
-    //     console.log(err);
-    //     return done(err);
-    //   }
-    //   console.log(user);
-    //   return done(null, user)
-    // })
   }
 ));
 
@@ -69,10 +56,10 @@ passport.use(new GoogleStrategy({
   callbackURL: Keys.google.callbackURL
 }, (accessToken, refreshToken, profile, cb) => {
   User.findOne({
-    id: profile.id
+    googleId: profile.id
   }, (err, user) => {
     if (err) {
-      return done(err);
+      return cb(err);
     }
 
     if (user) {
@@ -82,10 +69,15 @@ passport.use(new GoogleStrategy({
       }, {
         fullname: profile.displayName,
         avatar: profile.photos[0].value
-      }, (err) => {
+      }, (err, res) => {
         if (err) {
-          return done(err);
+          return cb(err);
         }
+
+        return cb(null, res);
+        // User.authentication(res, (users) => {
+        //   return cb(null, users);
+        // });
       })
     } else {
       //create a new user
@@ -93,13 +85,32 @@ passport.use(new GoogleStrategy({
       newUser.googleId = profile.id;
       newUser.fullname = profile.displayName;
       newUser.provider = profile.provider;
-      newUser.email = profile.email;
+      newUser.email = profile.emails[0].value;
       newUser.avatar = profile.photos[0].value;
+      newUser.isVerified = true;
 
-      newUser.save();
-      return cb(null, profile);
+      newUser.save((err, user) => {
+        createProfile(user);
+        // Generate token and pass it to the profile
+        return cb(null, user);
+        // User.authentication(user, (users) => {
+        //   return cb(null, users);
+        // });
+      });
     }
 
   })
 
 }));
+
+
+function createProfile(user) {
+  const newProfile = new Profile({
+    userid: user._id,
+    fullname: user.fullname,
+    avatar: user.avatar
+  })
+  newProfile.save((err) => {
+
+  });
+}

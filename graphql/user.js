@@ -66,10 +66,21 @@ const UserQuery = new GraphQLObjectType({
   name: 'UserQuery',
   fields: () => {
     return {
-      allstudents: {
+      users: {
         type: new GraphQLList(UserType),
         args: {
 
+        },
+        resolve: (root, params) => {
+
+        }
+      },
+      user: {
+        type: UserType,
+        args: {
+          id: {
+            type: GraphQLNonNull(GraphQLString)
+          }
         },
         resolve: (root, params) => {
 

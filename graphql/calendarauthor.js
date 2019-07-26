@@ -8,49 +8,66 @@ const GraphQLInt = require('graphql').GraphQLInt;
 const GraphQLFloat = require('graphql').GraphQLFloat;
 const GraphQLDate = require('graphql-date');
 const AuthenticationError = require('apollo-server').AuthenticationError;
-const Faculty = require('../models/faculty');
+const CalendarAuthor = require('../models/calendarauthor');
 
 
-const FacultyType = new GraphQLObjectType({
-  name: 'FacultyType',
+const CalendarauthorType = new GraphQLObjectType({
+  name: 'CalendarauthorType',
   fields: () => {
     return {
       _id: {
         type: GraphQLString
       },
-      faculty: {
+      calendarid: {
         type: GraphQLString
+      },
+      userid: {
+        type: GraphQLString
+      },
+      avatar: {
+        type: GraphQLString
+      },
+      fullname: {
+        type: GraphQLString
+      },
+      role: {
+        type: GraphQLString
+      },
+      type: {
+        type: GraphQLString
+      },
+      isexist: {
+        type: GraphQLBoolean
       }
     }
   }
 })
 
 
-const FacultyQuery = new GraphQLObjectType({
-  name: 'FacultyQuery',
+const CalendarauthorQuery = new GraphQLObjectType({
+  name: 'CalendarauthorQuery',
   fields: () => {
     return {
-      facultys: {
-        type: new GraphQLList(FacultyType),
+      calendarauthor: {
+        type: CalendarauthorType,
+        args: {},
         resolve: (root, params) => {
-          const _fac = Faculty.find().sort('faculty').exec();
-          if (!_fac) {
-            throw new Error('Error');
-          }
-          return _fac;
+
         }
       }
     }
   }
 })
 
-const FacultyMutation = new GraphQLObjectType({
-  name: 'FacultyMutation',
+const CalendarauthorMutation = new GraphQLObjectType({
+  name: 'CalendarauthorMutation',
   fields: () => {
     return {
-      addfaculty: {
-        type: FacultyType,
-        args: {},
+      addauthor: {
+        type: CalendarauthorType,
+        args: {
+
+        },
         resolve: (root, params) => {
 
         }
@@ -61,6 +78,6 @@ const FacultyMutation = new GraphQLObjectType({
 
 
 module.exports = new GraphQLSchema({
-  query: FacultyQuery,
-  mutation: FacultyMutation
+  query: CalendarauthorQuery,
+  mutation: CalendarauthorMutation
 })

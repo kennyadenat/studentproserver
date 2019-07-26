@@ -4,10 +4,28 @@ exports.GraphQL = function (app, cors) {
 
   // import all graphiql schemas
   const UserSchema = require('../graphql/user');
+  const ProfileSchema = require('../graphql/profile');
+  const InstitutionSchema = require('../graphql/institution');
+  const DepartmentSchema = require('../graphql/department');
+  const FacultySchema = require('../graphql/faculty');
+  const LevelSchema = require('../graphql/level');
+  const CalendartypeSchema = require('../graphql/calendartype');
+  const CalendarSchema = require('../graphql/calendar');
+  const CalendarauthorSchema = require('../graphql/calendarauthor');
+  const CalendareventSchema = require('../graphql/calendarevent');
 
   const allSchema = mergeSchemas({
     schemas: [
-      UserSchema
+      UserSchema,
+      ProfileSchema,
+      InstitutionSchema,
+      DepartmentSchema,
+      FacultySchema,
+      LevelSchema,
+      CalendartypeSchema,
+      CalendarSchema,
+      CalendarauthorSchema,
+      CalendareventSchema
     ]
   })
 

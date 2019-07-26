@@ -4,8 +4,24 @@ const Schema = mongoose.Schema;
 
 const DepartmentSchema = new Schema({
   department: {
-    type: String
+    type: String,
+    unique: true,
+    lowercase: true,
+    trim: true
   }
 })
 
-module.exports = mongoose.model('Department', DepartmentSchema)
+DepartmentSchema.statics.adddepartment = (inst, cb) => {
+  Department.findOne({
+    department: inst
+  }, (err, insts) => {
+    if (!insts) {
+      const newInst = new Department({
+        department: inst
+      })
+      newInst.save();
+    }
+  })
+}
+
+const Department = module.exports = mongoose.model('Department', DepartmentSchema)

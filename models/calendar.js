@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const timeZone = require('mongoose-timezone');
 const Schema = mongoose.Schema;
-
+const mongoose_fuzzy_searching = require('mongoose-fuzzy-searching');
 
 const CalendarSchema = new Schema({
   title: String,
@@ -9,13 +9,10 @@ const CalendarSchema = new Schema({
   // This describes the type of calendar
   type: String,
   // indicates color type for the calendar
-  color: String,
+  icon: String,
   note: String,
   // indicates if its public or private
   status: Boolean,
-  // for start date and end date, any event set wont exceed the calendar. .
-  startdate: Date,
-  enddate: Date,
   timezone: {
     type: Date
   },
@@ -28,6 +25,18 @@ const CalendarSchema = new Schema({
     ref: "CalendarAuthor"
   }],
 })
+
+CalendarSchema.plugin(mongoose_fuzzy_searching, {
+  fields: [{
+    name: 'title',
+    minSize: 3,
+    prefixOnly: true,
+  }, {
+    name: 'type',
+    minSize: 3,
+    prefixOnly: true,
+  }]
+});
 
 CalendarSchema.plugin(timeZone, {
   paths: ['timezone']
