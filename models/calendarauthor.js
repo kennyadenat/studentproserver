@@ -20,9 +20,15 @@ const CalendarauthorSchema = new Schema({
   role: {
     type: String
   },
+  // this indicates if the mode of addition is email or phone
+  // still email for present and move to phone number for 
+  // future purposes and preference
   type: {
     type: String
   },
+  // this indicates if the authors already has an account
+  // true for yes and false for sending a notification to create a
+  // new account
   isexist: {
     type: Boolean,
     default: false
