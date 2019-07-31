@@ -1,13 +1,65 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const Rule = require('./rrule');
+
 
 const CalendareventSchema = new Schema({
   calendarid: {
     type: Schema.Types.ObjectId,
     ref: 'Calendar'
   },
-  //This could be a course or subject or event
-  event: String,
+  userid: {
+    type: String
+  },
+  //configure events parameters
+  start: {
+    type: Date
+  },
+  end: {
+    type: Date
+  },
+  allDay: {
+    type: Boolean,
+    default: false
+  },
+  starttime: {
+    type: Date
+  },
+  endtime: {
+    type: Date
+  },
+  duration: {
+    type: Date
+  },
+  backgroundColor: {
+    type: String,
+    default: '#fff'
+  },
+  borderColor: {
+    type: String,
+    default: '#fff'
+  },
+  textColor: {
+    type: String,
+    default: '#000'
+  },
+  editable: {
+    type: Boolean,
+    default: false
+  },
+  rrule: Rule.schema,
+  //this could be a course or subject or event
+  event: {
+    type: String,
+    lowercase: true,
+    trim: true
+  },
+  //this indicates the auditorium, hall or venue
+  location: {
+    type: String,
+    lowercase: true,
+    trim: true
+  },
   note: String,
 }, {
   timestamps: true

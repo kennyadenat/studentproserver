@@ -38,6 +38,56 @@ const CalendarauthorType = new GraphQLObjectType({
       },
       isexist: {
         type: GraphQLBoolean
+      },
+      title: {
+        type: GraphQLString
+      },
+      note: {
+        type: GraphQLString
+      },
+      status: {
+        type: GraphQLBoolean
+      },
+      timezone: {
+        type: GraphQLString
+      }
+    }
+  }
+})
+
+const CalendarauthorList = new GraphQLObjectType({
+  name: 'CalendarauthorList',
+  fields: () => {
+    return {
+      docs: {
+        type: new GraphQLList(CalendarauthorType)
+      },
+      totalDocs: {
+        type: GraphQLString
+      },
+      limit: {
+        type: GraphQLString
+      },
+      page: {
+        type: GraphQLString
+      },
+      totalPages: {
+        type: GraphQLString
+      },
+      hasNextPage: {
+        type: GraphQLBoolean
+      },
+      nextPage: {
+        type: GraphQLString
+      },
+      hasPrevPage: {
+        type: GraphQLBoolean
+      },
+      prevPage: {
+        type: GraphQLString
+      },
+      pagingCounter: {
+        type: GraphQLString
       }
     }
   }

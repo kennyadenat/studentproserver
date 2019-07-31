@@ -5,7 +5,6 @@ const sgMail = require('@sendgrid/mail');
 // signup email notification service
 exports.mailService = function (payload) {
   sgMail.setApiKey(config.sendgrid);
-  console.log(payload.link);
   const msg = {
     to: payload.email,
     from: 'kennyadenat09@gmail.com',
@@ -14,4 +13,9 @@ exports.mailService = function (payload) {
     html: payload.link,
   };
   sgMail.send(msg);
+}
+
+
+exports.authorInvite = function (payload) {
+  sgMail.setApiKey(config.sendgrid);
 }

@@ -13,6 +13,8 @@ exports.GraphQL = function (app, cors) {
   const CalendarSchema = require('../graphql/calendar');
   const CalendarauthorSchema = require('../graphql/calendarauthor');
   const CalendareventSchema = require('../graphql/calendarevent');
+  const ParentSchema = require('../graphql/parent');
+
 
   const allSchema = mergeSchemas({
     schemas: [
@@ -25,7 +27,8 @@ exports.GraphQL = function (app, cors) {
       CalendartypeSchema,
       CalendarSchema,
       CalendarauthorSchema,
-      CalendareventSchema
+      CalendareventSchema,
+      ParentSchema
     ]
   })
 

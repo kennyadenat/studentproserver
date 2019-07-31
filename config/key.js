@@ -18,6 +18,10 @@ module.exports = {
   session: {
     cookieKey: "ycangehtyurjnghnk2258795nnfhndvj4iunfurnnbg"
   },
+  client: {
+    dev: 'http://localhost:4200',
+    prod: ''
+  },
   secret: "edrxfctgvyhubijnko5467yuiordcfv45655fgdttejdorywudn756672mmsgyfus",
   port: process.env.PORT || 4000
 }

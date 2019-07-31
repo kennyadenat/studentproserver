@@ -5,13 +5,22 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const passport = require('passport');
 const cors = require('cors');
+const app = express();
 const passportconfig = require('./config/passport');
 const avatar = require('./config/avatar')
 const graphQL = require('./config/graphql');
 const mongoose = require('./config/mongoose');
 const modelware = require('./config/modelware');
 const uuidv1 = require('uuid/v1');
+const radomString = require('randomstring');
 
+const socketIO = require('socket.io');
+const server = app.listen(process.env.PORT);
+const io = socketIO(server);
+
+io.sockets.on("connection", (socket) => {
+  console.log(socket.id);
+})
 
 // Setup routes
 const indexRouter = require('./routes/index');
@@ -27,7 +36,6 @@ modelware.CalendarType();
 modelware.LecturerOption();
 
 
-var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');

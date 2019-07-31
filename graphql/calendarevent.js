@@ -1,5 +1,6 @@
 const GraphQLSchema = require('graphql').GraphQLSchema;
 const GraphQLObjectType = require('graphql').GraphQLObjectType;
+const GraphQLInputObjectType = require('graphql').GraphQLInputObjectType;
 const GraphQLList = require('graphql').GraphQLList;
 const GraphQLNonNull = require('graphql').GraphQLNonNull;
 const GraphQLString = require('graphql').GraphQLString;
@@ -9,6 +10,70 @@ const GraphQLFloat = require('graphql').GraphQLFloat;
 const GraphQLDate = require('graphql-date');
 const AuthenticationError = require('apollo-server').AuthenticationError;
 
+
+const RuleType = new GraphQLObjectType({
+  name: 'RuleType',
+  fields: () => {
+    return {
+      freq: {
+        type: GraphQLString
+      },
+      interval: {
+        type: GraphQLString
+      },
+      dtstart: {
+        type: GraphQLString
+      },
+      until: {
+        type: GraphQLString
+      },
+      count: {
+        type: GraphQLString
+      },
+      wkst: {
+        type: GraphQLString
+      },
+      byweekday: {
+        type: GraphQLString
+      },
+      bymonth: {
+        type: GraphQLString
+      },
+    }
+  }
+})
+
+const RuleInputType = new GraphQLInputObjectType({
+  name: 'RuleInputType',
+  fields: () => {
+    return {
+      freq: {
+        type: GraphQLString
+      },
+      interval: {
+        type: GraphQLString
+      },
+      dtstart: {
+        type: GraphQLString
+      },
+      until: {
+        type: GraphQLString
+      },
+      count: {
+        type: GraphQLString
+      },
+      wkst: {
+        type: GraphQLString
+      },
+      byweekday: {
+        type: GraphQLString
+      },
+      bymonth: {
+        type: GraphQLString
+      },
+    }
+  }
+})
 
 const CalendareventType = new GraphQLObjectType({
   name: 'CalendareventType',
@@ -20,7 +85,46 @@ const CalendareventType = new GraphQLObjectType({
       calendarid: {
         type: GraphQLString
       },
+      userid: {
+        type: GraphQLString
+      },
+      start: {
+        type: GraphQLDate
+      },
+      end: {
+        type: GraphQLDate
+      },
+      allDay: {
+        type: GraphQLBoolean
+      },
+      starttime: {
+        type: GraphQLDate
+      },
+      endtime: {
+        type: GraphQLDate
+      },
+      duration: {
+        type: GraphQLDate
+      },
+      backgroundColor: {
+        type: GraphQLString
+      },
+      borderColor: {
+        type: GraphQLString
+      },
+      textColor: {
+        type: GraphQLString
+      },
+      editable: {
+        type: GraphQLBoolean
+      },
+      rrule: {
+        type: RuleType
+      },
       event: {
+        type: GraphQLString
+      },
+      location: {
         type: GraphQLString
       },
       note: {
@@ -40,11 +144,17 @@ const CalendareventQuery = new GraphQLObjectType({
         resolve: (root, params) => {
 
         }
+      },
+      event: {
+        type: new GraphQLList(CalendareventType),
+        args: {},
+        resolve: () => {
+
+        }
       }
     }
   }
 })
-
 
 const CalendareventMutation = new GraphQLObjectType({
   name: 'CalendareventMutation',
@@ -52,7 +162,56 @@ const CalendareventMutation = new GraphQLObjectType({
     return {
       addevents: {
         type: CalendareventType,
-        args: {},
+        args: {
+          calendarid: {
+            type: GraphQLString
+          },
+          userid: {
+            type: GraphQLString
+          },
+          start: {
+            type: GraphQLDate
+          },
+          end: {
+            type: GraphQLDate
+          },
+          allDay: {
+            type: GraphQLBoolean
+          },
+          starttime: {
+            type: GraphQLDate
+          },
+          endtime: {
+            type: GraphQLDate
+          },
+          duration: {
+            type: GraphQLDate
+          },
+          backgroundColor: {
+            type: GraphQLString
+          },
+          borderColor: {
+            type: GraphQLString
+          },
+          textColor: {
+            type: GraphQLString
+          },
+          editable: {
+            type: GraphQLBoolean
+          },
+          rrule: {
+            type: RuleInputType
+          },
+          event: {
+            type: GraphQLString
+          },
+          location: {
+            type: GraphQLString
+          },
+          note: {
+            type: GraphQLString
+          }
+        },
         resolve: (root, params) => {
 
         }

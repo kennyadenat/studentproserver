@@ -7,6 +7,7 @@ const UserToken = require('../models/usertoken');
 const Service = require('../services/emailservice');
 const Avatar = require('../config/avatar');
 const Profile = require('../models/profile');
+const Config = require('../config/key');
 
 // user signup route
 router.post('/signup', (req, res) => {
@@ -163,9 +164,9 @@ router.get('/google/redirect',
   passport.authenticate('google', {
     failureRedirect: 'http://localhost:4200/'
   }), (req, res) => {
-    console.log(req.user);
-    const urls = 'localhost:4200'
-    const url = 'http:\/\/' + urls + '\/authredirect\/' + req.user._id;
+    // console.log(req.user);
+    // const urls = 'localhost:4200'
+    const url = Config.client.dev + '\/authredirect\/' + req.user._id;
 
     // Successful authentication, redirect home.
     res.redirect(url);

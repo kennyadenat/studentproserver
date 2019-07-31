@@ -63,4 +63,4 @@ typings/
 
 # Config file
 config/
-"sendgrid.env" 
+"sendgrid.env"

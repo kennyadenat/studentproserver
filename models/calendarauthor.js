@@ -7,9 +7,12 @@ const CalendarauthorSchema = new Schema({
     ref: 'Calendar'
   },
   userid: {
-    type: Schema.Types.ObjectId,
+    type: String,
   },
   avatar: {
+    type: String
+  },
+  email: {
     type: String
   },
   // fullname for if_exist and Unknown for not found
