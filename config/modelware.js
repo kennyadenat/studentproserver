@@ -5,6 +5,9 @@ const Department = require('../models/department');
 const Level = require('../models/level');
 const Calendartype = require('../models/calendartype');
 const LecturerOption = require('../models/lectureroption');
+const Course = require('../models/course');
+const Color = require('../models/color');
+const UserRole = require('../models/userrole');
 
 
 
@@ -159,4 +162,91 @@ exports.LecturerOption = function () {
     const category = new LecturerOption(element);
     category.save((err, cat) => {});
   });
+}
+
+exports.CourseModel = function () {
+  const courses = [{
+    course: 'Biology'
+  }, {
+    course: 'Chemistry'
+  }, {
+    course: 'Physics'
+  }, {
+    course: 'Mathematics'
+  }, {
+    course: 'English'
+  }, {
+    course: 'Economics'
+  }, {
+    course: 'Computer Science'
+  }]
+
+  courses.forEach((element) => {
+    const newCourse = new Course(element);
+    newCourse.save((err, res) => {});
+  })
+}
+
+exports.ColorModel = function () {
+  const colors = [{
+    color: 'Green',
+    code: 'm-radio--state-success',
+    textcolor: '#fff'
+  }, {
+    color: 'Purple',
+    code: 'm-radio--state-focus',
+    textcolor: '#fff'
+  }, {
+    color: 'Red',
+    code: 'm-radio--state-danger',
+    textcolor: '#fff'
+  }, {
+    color: 'Blue',
+    code: 'm-radio--state-info',
+    textcolor: '#fff'
+  }, {
+    color: 'Harvard University',
+    code: 'm-radio--state-accent',
+    textcolor: '#fff'
+  }, {
+    color: 'Yellow',
+    code: 'm-radio--state-warning',
+    textcolor: '#fff'
+  }, {
+    color: 'White',
+    code: 'm-radio--state-secondary',
+    textcolor: '#000'
+  }]
+
+  colors.forEach((element) => {
+    const newColor = new Color(element);
+    newColor.save((err, res) => {});
+  })
+}
+
+exports.UserroleModel = function () {
+  const users = [{
+    role: 'Lecturer'
+  }, {
+    role: 'Assisting Lecturer'
+  }, {
+    role: 'Invigilator'
+  }, {
+    role: 'Examiner'
+  }, {
+    role: 'External Examiner'
+  }, {
+    role: 'AD Hoc'
+  }, {
+    role: 'Student'
+  }, {
+    role: 'Panel'
+  }, {
+    role: 'Interviewer'
+  }]
+
+  users.forEach((element) => {
+    const newUser = new UserRole(element);
+    newUser.save((err, res) => {});
+  })
 }

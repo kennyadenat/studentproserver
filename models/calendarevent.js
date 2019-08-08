@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const Rule = require('./rrule');
+const Calendareventrole = require('./calendareventrole');
 
 
 const CalendareventSchema = new Schema({
@@ -35,10 +36,6 @@ const CalendareventSchema = new Schema({
     type: String,
     default: '#fff'
   },
-  borderColor: {
-    type: String,
-    default: '#fff'
-  },
   textColor: {
     type: String,
     default: '#000'
@@ -60,6 +57,12 @@ const CalendareventSchema = new Schema({
     lowercase: true,
     trim: true
   },
+  note: {
+    type: String,
+    lowercase: true,
+    trim: true
+  },
+  Calendareventrole: [Calendareventrole.schema],
   note: String,
 }, {
   timestamps: true

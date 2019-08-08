@@ -34,6 +34,9 @@ modelware.DepartmentModel();
 modelware.LevelModel();
 modelware.CalendarType();
 modelware.LecturerOption();
+modelware.CourseModel();
+modelware.ColorModel();
+modelware.UserroleModel();
 
 
 // view engine setup

@@ -354,28 +354,28 @@ const CalendarMutation = new GraphQLObjectType({
           for those without an account, an invite link is being sent: phone: text, email - mail
           */
 
-          // _calendar.save((err, calendar) => {
-          //   if (err) console.log(err);
-          //   params.calendarauthor.forEach(element => {
-          //     const author = new CalendarAuthor({
-          //       calendarid: calendar._id,
-          //       userid: element.userid,
-          //       avatar: element.avatar,
-          //       fullname: element.fullname,
-          //       role: element.role,
-          //       isexist: element.isexist,
-          //       email: element.email
-          //     })
+          _calendar.save((err, calendar) => {
+            if (err) console.log(err);
+            params.calendarauthor.forEach(element => {
+              const author = new CalendarAuthor({
+                calendarid: calendar._id,
+                userid: element.userid,
+                avatar: element.avatar,
+                fullname: element.fullname,
+                role: element.role,
+                isexist: element.isexist,
+                email: element.email
+              })
 
-          //     author.save();
-          //     _calendar.calendarauthor.push(author);
-          //   });
+              author.save();
+              _calendar.calendarauthor.push(author);
+            });
 
-          //   return _calendar.save(function (err, res) {
-          //     return res;
-          //   });
+            return _calendar.save(function (err, res) {
+              return res;
+            });
 
-          // })
+          })
 
           /*  send notification real time to users..
            for non existent, send an email to join.

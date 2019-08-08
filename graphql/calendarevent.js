@@ -11,6 +11,74 @@ const GraphQLDate = require('graphql-date');
 const AuthenticationError = require('apollo-server').AuthenticationError;
 
 
+
+const CalendareventroleType = new GraphQLObjectType({
+  name: 'CalendareventroleType',
+  fields: () => {
+    return {
+      calendarid: {
+        type: GraphQLString
+      },
+      eventid: {
+        type: GraphQLString
+      },
+      userid: {
+        type: GraphQLString
+      },
+      fullname: {
+        type: GraphQLString
+      },
+      avatar: {
+        type: GraphQLString
+      },
+      email: {
+        type: GraphQLString
+      },
+      identityid: {
+        type: GraphQLString
+      },
+      role: {
+        type: GraphQLString
+      }
+    }
+  }
+})
+
+const CalendareventroleInputType = new GraphQLInputObjectType({
+  name: 'CalendareventroleInputType',
+  fields: () => {
+    return {
+      calendarid: {
+        type: GraphQLString
+      },
+      eventid: {
+        type: GraphQLString
+      },
+      calendarid: {
+        type: GraphQLString
+      },
+      userid: {
+        type: GraphQLString
+      },
+      fullname: {
+        type: GraphQLString
+      },
+      avatar: {
+        type: GraphQLString
+      },
+      email: {
+        type: GraphQLString
+      },
+      identityid: {
+        type: GraphQLString
+      },
+      role: {
+        type: GraphQLString
+      }
+    }
+  }
+})
+
 const RuleType = new GraphQLObjectType({
   name: 'RuleType',
   fields: () => {
@@ -107,9 +175,6 @@ const CalendareventType = new GraphQLObjectType({
         type: GraphQLDate
       },
       backgroundColor: {
-        type: GraphQLString
-      },
-      borderColor: {
         type: GraphQLString
       },
       textColor: {
@@ -210,6 +275,9 @@ const CalendareventMutation = new GraphQLObjectType({
           },
           note: {
             type: GraphQLString
+          },
+          Calendareventrole: {
+            type: new GraphQLList(CalendareventroleInputType)
           }
         },
         resolve: (root, params) => {

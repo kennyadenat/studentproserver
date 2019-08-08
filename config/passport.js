@@ -108,7 +108,8 @@ function createProfile(user) {
   const newProfile = new Profile({
     userid: user._id,
     fullname: user.fullname,
-    avatar: user.avatar
+    avatar: user.avatar,
+    email: user.email
   })
   newProfile.save((err) => {
 
